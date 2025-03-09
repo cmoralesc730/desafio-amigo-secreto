@@ -1,10 +1,13 @@
 <h1 align="center"> Challenge del Amigo Secreto de Alura </h1>
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/bd92e6b7-25de-423d-83c5-d14b1fcddb79" width=115>
+</p>
 
-# Descripción del Proyecto
+## 🤔Descripción del Proyecto
 
 Proyecto con enfoque en la creación de una página web que recibe una lista de nombres y selecciona de manera aleatoria a un "amigo secreto" entre estos.
 
-# Estado del Proyecto
+## 👷Estado del Proyecto
 
 👍 Finalizado 🫡
 
