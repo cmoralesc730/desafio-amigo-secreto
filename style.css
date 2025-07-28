@@ -1,162 +1,173 @@
-:root {
-    --color-primary: #4B69FD;
-    --color-secondary: #FFF9EB;
-    --color-tertiary: #C4C4C4;
-    --color-button: #fe652b;
-    --color-button-hover: #e55720;
-    --color-text: #444444;
-    --color-white: #FFFFFF;
-}
-
-/* Estilos generales */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Estilos generales mejorados */
 body {
-    height: 100vh;
-    background-color: var(--color-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--color-text);
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-}
-
-/* Banner */
-.header-banner {
-    flex: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 0 0;
-}
-
-/* Sección de entrada */
-.input-section {
-    flex: 60%;
-    background-color: var(--color-secondary);
-    border: 1px solid #000;
-    border-radius: 64px 64px 0 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    width: 100%;
-}
-
-/* Títulos */
-.main-title {
-    font-size: 48px;
-    font-family: "Merriweather", serif;
-    font-weight: 900;
-    font-style: italic;
-    color: var(--color-white);
-}
-
-.section-title {
-    font-family: "Inter", serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin: 10px 0;
+/* Estilos de carga */
+.cargando {
     text-align: center;
+    padding: 20px;
+    color: var(--color-primary);
+    font-style: italic;
 }
 
-/* Contenedores de entrada y botón */
-.input-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-}
-
-.input-name {
-    width: 100%;
+/* Estilos de error */
+.error {
+    color: #d32f2f;
+    background-color: #ffebee;
     padding: 10px;
-    border: 2px solid #000;
-    border-radius: 25px 0 0 25px;
-    font-size: 16px;
+    border-radius: 4px;
+    margin: 10px 0;
 }
 
-.button-container {
-    width: 300px;
-    justify-content: center;
+/* Estilos de aviso */
+.aviso {
+    color: var(--color-primary);
+    background-color: #e3f2fd;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
 }
 
-/* Estilos de entrada de texto */
-.input-title {
+/* Estilos para lista vacía */
+.vacio {
+    text-align: center;
+    padding: 20px;
+    color: var(--color-tertiary);
+    font-style: italic;
+}
+
+/* Estilos CRUD mejorados */
+.name-list-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.list-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.list-item:hover {
+    background-color: #f9f9f9;
+}
+
+.amigo-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.amigo-botones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.editable-nombre {
     flex: 1;
     padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
     font-size: 16px;
-    border: 2px solid #333;
-    border-right: none;
-    border-radius: 25px 0 0 25px;
-    font-family: "Merriweather", serif;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 5px;
+    transition: border-color 0.3s;
 }
 
-/* Estilos de botón */
+.editable-nombre:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+.fecha-creacion {
+    font-size: 12px;
+    color: #666;
+    margin-left: 5px;
+}
+
+/* Botones mejorados */
 button {
-    padding: 15px 30px;
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    border: 2px solid #000;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-update, .btn-delete {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.button-add {
-    background-color: var(--color-tertiary);
-    color: var(--color-text);
-    border-radius: 0 25px 25px 0;
+.btn-update {
+    background-color: #4CAF50;
+    color: white;
 }
 
-.button-add:hover {
-    background-color: #a1a1a1;
+.btn-update:hover {
+    background-color: #388E3C;
+    transform: translateY(-1px);
 }
 
-/* Listas */
-ul {
-    list-style-type: none;
-    color: var(--color-text);
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+    transform: translateY(-1px);
+}
+
+/* Resultado del sorteo */
+.ganador {
+    text-align: center;
+    padding: 20px;
+    background-color: #e8f5e9;
+    border-radius: 8px;
     margin: 20px 0;
 }
 
-.result-list {
-    margin-top: 15px;
-    color: #05DF05;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
+.ganador strong {
+    display: block;
+    font-size: 24px;
+    color: var(--color-primary);
+    margin: 10px 0;
 }
 
-/* Botón de sortear título */
-.button-draw {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px 40px;
-    color: var(--color-white);
-    background-color: var(--color-button);
-    font-size: 16px;
+.fecha-sorteo {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
 }
 
-.button-draw img {
-    margin-right: 40px;
-}
-
-.button-draw:hover {
-    background-color: var(--color-button-hover);
+/* Responsive */
+@media (max-width: 768px) {
+    .list-item {
+        flex-direction: column;
+    }
+    
+    .amigo-botones {
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .editable-nombre {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
 }
