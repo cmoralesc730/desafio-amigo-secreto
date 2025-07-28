@@ -19,25 +19,15 @@
         </header>
         
         <section class="input-section">
-            <h2 class="section-title">Gestión de Amigos</h2>
-            <div class="input-wrapper">
-                <input type="text" id="amigo" class="input-name" placeholder="Escribe un nombre" aria-label="Nombre del amigo">
-                <button class="button-add" onclick="agregarAmigo()" aria-label="Añadir amigo">Añadir</button>
-            </div>
-           
-            <div id="listaAmigos" class="name-list-container" aria-label="Lista de amigos"></div>
-            
-            <div id="resultado" class="result-list" aria-live="polite"></div>
-
-            <div class="button-container">
-                <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
-                    <img src="assets/play_circle_outline.png" alt="Ícono para sortear" width="24">
-                    Sortear amigo
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <script src="app.js"></script>
+      <input type="text" id="amigo" placeholder="Escribe un nombre">
+      <button class="button-add">Añadir</button>
+      
+      <div id="listaAmigos" class="name-list-container"></div>
+      <ul id="resultado" class="result-list"></ul>
+      
+      <button class="button-draw">Sortear amigo</button>
+    </section>
+  </main>
+  <script src="app.js"></script>
 </body>
 </html>
