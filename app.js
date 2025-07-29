@@ -1,35 +1,67 @@
-// Lista para almacenar los nombres de los amigos
+const API_BASE = 'https://05lyrrcvi2.execute-api.us-east-1.amazonaws.com/prod';
+
 let amigos = [];
 
-// Función para agregar un amigo a la lista
+// Agregar amigo y enviarlo a la API
 function agregarAmigo() {
-    let input = document.getElementById("amigo"); // Captura el campo de entrada
-    let nombre = input.value.trim(); // Elimina espacios en blanco
-    
-    // Validar que el campo no esté vacío
+    let input = document.getElementById("amigo");
+    let nombre = input.value.trim();
+
     if (nombre === "") {
         alert("Por favor, inserte un nombre.");
         return;
     }
 
-    // Verificar que solo contenga letras (sin números ni símbolos)
     if (!/^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$/.test(nombre)) {
         alert("El nombre solo puede contener letras y espacios.");
         input.focus();
         return;
     }
 
-    amigos.push(nombre); // Agregar el nombre al array
-    input.value = ""; // Limpiar el campo de entrada
-    actualizarLista(); // Actualizar la lista visualmente
+    const nuevoAmigo = {
+        id: crypto.randomUUID(), // Genera un ID único para cada amigo
+        nombre: nombre
+    };
+
+    // Enviar a la API
+    fetch(`${API_BASE}/amigos`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(nuevoAmigo)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Error al guardar el amigo.");
+        amigos.push(nombre);
+        input.value = "";
+        actualizarLista();
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Ocurrió un error al guardar el amigo.");
+    });
 }
 
-// Función para actualizar la lista de amigos en la interfaz
+// Cargar amigos desde la API
+function cargarAmigos() {
+    fetch(`${API_BASE}/amigos`)
+        .then(response => response.json())
+        .then(data => {
+            // Si body es string, parseamos a JSON
+            amigos = typeof data.body === "string" ? JSON.parse(data.body) : data.body;
+            actualizarLista();
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error al cargar la lista de amigos.");
+        });
+}
+
+// Actualiza la lista visual
 function actualizarLista() {
-    let lista = document.getElementById("listaAmigos"); // Seleccionar el contenedor de la lista
-    lista.innerHTML = ""; // Limpiar la lista antes de actualizar
-    
-    // Recorrer el array y crear elementos <li> para cada amigo
+    let lista = document.getElementById("listaAmigos");
+    lista.innerHTML = "";
     amigos.forEach(amigo => {
         let li = document.createElement("li");
         li.textContent = amigo;
@@ -37,19 +69,25 @@ function actualizarLista() {
     });
 }
 
-// Función para sortear un amigo aleatoriamente
+// Sortea amigo usando la API
 function sortearAmigo() {
-    // Validar que haya amigos en la lista
     if (amigos.length === 0) {
         alert("No hay amigos para sortear.");
         return;
     }
 
-    // Generar un índice aleatorio dentro del rango del array
-    let indiceAleatorio = Math.floor(Math.random() * amigos.length);
-    let amigoSorteado = amigos[indiceAleatorio]; // Obtener el nombre sorteado
-    
-    // Mostrar el resultado en la interfaz
-    let resultado = document.getElementById("resultado");
-    resultado.innerHTML = `<li>El amigo sorteado es: <strong>${amigoSorteado}</strong></li>`;
+    fetch(`${API_BASE}/sorteo`)
+        .then(response => response.json())
+        .then(data => {
+            const nombre = typeof data.body === "string" ? JSON.parse(`"${data.body}"`) : data.body;
+            let resultado = document.getElementById("resultado");
+            resultado.innerHTML = `<li>El amigo sorteado es: <strong>${nombre}</strong></li>`;
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error al realizar el sorteo.");
+        });
 }
+
+// Ejecuta al cargar la página
+document.addEventListener("DOMContentLoaded", cargarAmigos);
